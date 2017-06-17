@@ -39,12 +39,6 @@ void read_links() {
 	int from;
 	int to;
 		
-	//links.resize(SIZE_OF_LINKS);
-	//for (int i = 0; i < SIZE_OF_LINKS; i++) {
-	//	ifs >> from >> to;
-	//	links[i]=make_pair(from, to);
-	//}
-	
 	ifs >> from >> to;
 
 	//メモリ節約のために最初にまとめて確保する
