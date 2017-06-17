@@ -74,17 +74,18 @@ int bfs(int from, int to, vector<vector<int>> &graph, pair<int, int> &farthest) 
 	queue<pair<int, int>> que;
 	pair<int, int> last;
 
+	visited.insert(from);
 	que.push(make_pair(from, 0));	
 	while (!que.empty()) {
 		pair<int, int> t = que.front();
 		que.pop();
-		visited.insert(t.first);
 		if (t.first == to) {
 			return t.second;
 		}
 		for (auto element: graph[t.first]) {
 			auto iter = visited.find(element);
 			if (iter == visited.end()) {
+				visited.insert(element);
 				que.push(make_pair(element, t.second + 1));
 			}
 		}
@@ -150,18 +151,19 @@ vector<int> bfs2(int from, int to, vector<vector<int>> &graph, pair<int, vector<
 	vector<int> start;
 	start.push_back(from);
 
+	visited.insert(from);
 	que.push(make_pair(from, start));	
 
 	while (!que.empty()) {
 		pair<int, vector<int>> t = que.front();
 		que.pop();
-		visited.insert(t.first);
 		if (t.first == to) {
 			return t.second;
 		}
 		for (auto element: graph[t.first]) {
 			auto iter = visited.find(element);
 			if (iter == visited.end()) {
+				visited.insert(element);
 				vector<int> temp = t.second;
 				temp.push_back(element);
 				que.push(make_pair(element, temp));
