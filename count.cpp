@@ -77,13 +77,32 @@ int main() {
 	read_links();
 	int max = 0;
 	
+	vector<int> dist;
+
+	dist.assign(217672, 0);
+
+	ofstream ofs_notsited;
+	ofs_notsited.open("notsited.txt", ios::out);
+
 	for (int i = 0; i < sited.size(); i++) {
 		if (sited[max] < sited[i]) {
 			max = i;
 		}
+		if (sited[i] == 0) {
+			ofs_notsited << i << endl;
+		}
+		dist[sited[i]]++;
 	}
 
+	cout << "一番参照されているページ" << endl;
 	cout << max << ", " << sited[max] << endl;
+
+	ofstream ofs_dist;
+	ofs_dist.open("dist.txt", ios::out);
+
+	for (int i = 0; i < dist.size(); i++) {
+		ofs_dist << i << " " << dist[i] << endl;
+	}
 
 
 	return 0;

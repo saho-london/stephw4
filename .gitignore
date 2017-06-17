@@ -34,6 +34,7 @@
 # Temp file
 *.cpp~
 .gitignore~
+plot
 plot~
 *.sh~
 
