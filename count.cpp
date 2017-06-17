@@ -79,7 +79,7 @@ int main() {
 	
 	vector<int> dist;
 
-	dist.assign(217672, 0);
+	dist.assign(218000, 0);
 
 	ofstream ofs_notsited;
 	ofs_notsited.open("notsited.txt", ios::out);
