@@ -1,4 +1,6 @@
+#include	<sys/time.h>
 #include	<iostream>
+#include	<iomanip>
 #include	<utility>
 #include	<string>
 #include	<vector>
@@ -155,8 +157,7 @@ vector<int> bfs2(int from, int to, vector<vector<int>> &graph, pair<int, vector<
 	que.push(make_pair(from, start));	
 
 	while (!que.empty()) {
-		pair<int, vector<int>> t = que.front();
-		que.pop();
+		pair<int, vector<int>>& t = que.front();
 		if (t.first == to) {
 			return t.second;
 		}
@@ -169,6 +170,7 @@ vector<int> bfs2(int from, int to, vector<vector<int>> &graph, pair<int, vector<
 				que.push(make_pair(element, temp));
 			}
 		}
+		que.pop();
 		last = t;
 	}
 	farthest = last;
@@ -258,10 +260,21 @@ void test_find_path() {
 }
 
 
+double get_sec() {
+  timeval tv;
+  gettimeofday(&tv, nullptr);
+  return tv.tv_sec + (double)tv.tv_usec / 1E6;
+}
+
 int main() {
 	int from, to;
 
+    double before, after;
+    before = get_sec();
 	read_links();
+    after = get_sec();
+    cout << "read_links: "
+         << setprecision(3) << after - before << " sec" << endl;
 	test_find_path();
 
 	cout << "enter 2 integers" << endl;
@@ -271,7 +284,11 @@ int main() {
 	cin >> from >> to;
 
 	while (from != -1 || to != -1) {
+		before = get_sec();
 		find_path(from, to);
+		after = get_sec();
+		cout << "read_links: "
+			 << setprecision(3) << after - before << " sec" << endl;
 		cout << "> ";
 		cin >> from >> to;
 	}
